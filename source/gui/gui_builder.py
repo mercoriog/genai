@@ -1,7 +1,7 @@
 import gradio as gr
-import examples as ex
-import garments as gars
-import comfyui_api as comfy
+from . import examples as ex
+from . import garments as gars
+from . import comfyui_api as comfy
 
 # gestione feedback
 def getFeedback(positive_prompt, negative_prompt):
@@ -9,13 +9,13 @@ def getFeedback(positive_prompt, negative_prompt):
 
 # combine user's choices to build the correct one and only positive prompt
 def buildPositivePrompt(gender_input, hair_color_input, eyes_color_input, positive_prompt, items_gallery):
-    item_description = gar.getGarmentDescription(items_gallery)
+    item_description = gars.getGarmentDescription(items_gallery)
 
-    fixed_positive_prompt = 
-        f"full body photo of {hair_color_input} {gender_input} model wearing {item_description}, " +
-        f"{eyes_color_input}:1.2, realistic face, " +
-        f"{positive_prompt}"
-    
+    fixed_positive_prompt = f"full body photo of {hair_color_input} {gender_input} model wearing {item_description}, \
+        {eyes_color_input}:1.2, \
+        realistic face, \
+        {positive_prompt}"
+        
     return fixed_positive_prompt
 
 # GUI builder method:
@@ -33,11 +33,23 @@ def buildGUI():
                     clear_button.render()
                     generate_button.render()
 
-            items_gallery.render()
-
-        examples_gallery.render()
-        image_output.render()
-        flag_button.render()
+            with gr.Column():
+                items_gallery.render()
+                image_output.render()
+                flag_button.render()
+        
+        examples_gallery = gr.Examples(
+            examples = ex.getExamples(),
+            inputs = [
+                gender_input, 
+                hair_color_input, 
+                eyes_color_input, 
+                positive_prompt, 
+                negative_prompt, 
+                image_output
+            ],
+            label = "Examples:"
+        )
 
         # combine user's choices to build positive prompt:
         fixed_positive_prompt = buildPositivePrompt(
@@ -47,7 +59,25 @@ def buildGUI():
             positive_prompt, 
             items_gallery
         )
-        
+        # fike component to store fixed positive prompt
+        fixed_component = gr.Textbox(value = fixed_positive_prompt, render = False)
+
+        # generate image event:
+        generate_button.click(
+            fn = comfy.generateImage, 
+            inputs = [fixed_component, negative_prompt],
+            outputs = [image_output],
+            scroll_to_output = True,
+            show_progress = "minimal"
+        )
+
+        # give feedback event:
+        flag_button.click(
+            fn = getFeedback,
+            inputs = [positive_prompt, negative_prompt],
+            preprocess = False
+        )
+
         return demo
 
 #GUI elements:
@@ -121,30 +151,6 @@ generate_button = gr.Button(
     variant = "primary"
 )
 
-generate_button.click(
-    fn = comfy.generateImage, 
-    inputs = [fixed_positive_prompt, negative_prompt],
-    outputs = [image_output],
-    scroll_to_output = True,
-    show_progress = "minimal"
-)
-
-# examples:
-examples_list = ex.getExamples()
-examples_gallery = gr.Examples(
-    examples = examples_list,
-    inputs = [
-        gender_input, 
-        hair_color_input, 
-        eyes_color_input, 
-        positive_prompt, 
-        negative_prompt, 
-        image_output
-    ],
-    label = "Examples:"
-)
-
-
 # flag setup:
 # flagger object to save user's feedkback
 callback = gr.CSVLogger()
@@ -158,10 +164,4 @@ callback.setup(
 flag_button = gr.Button(
     value = "Report incorrect image", 
     variant = "stop"
-)
-
-flag_button.click(
-    fn = getFeedback,
-    inputs = [positive_prompt, negative_prompt],
-    preprocess = False
 )

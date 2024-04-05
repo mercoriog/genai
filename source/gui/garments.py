@@ -12,7 +12,7 @@ def getGarmentsList():
 	return garment_images
 
 def getGarmentDescription(item_index):
-    if item_description == 0:
-        item_description="dark gray jacket, arman1jacket:1.2"
-    else: item_description = ""
-    return item_description
+    if item_index == 0:
+        item_index = "dark gray jacket, arman1jacket:1.2"
+    else: item_index = ""
+    return item_index

@@ -7,7 +7,8 @@ examples_images = [
     Image.open("genai\\media\\generated_images\\male_ginger_blue_arman1jacket.png")
 ]
 
-examples_list = [[
+examples_list = [
+	[
 		"Male",
     	"Blonde", 
     	"Blue", 
@@ -28,9 +29,10 @@ examples_list = [[
         "GIORGIO ARMANI, full body photo of ginger male model wearing dark gray jacket, arman1jacket:1.2, realistic face, extremely high quality RAW photograph, detailed background, intricate, Exquisite details and textures, sharp focus, highly detailed, ultra detailed photograph, warm lighting, 4k,  high resolution, detailed skin, detailed eyes, 8k UHD, DSLR, high quality, film grain, Fujifilm XT3, private party on yatch, summer days", 
         "(worst quality, greyscale), ac_neg2, zip2d_neg, ziprealism_neg, watermark, username, signature, text, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, jpeg artifacts, bad feet, extra fingers, mutated hands, poorly drawn hands, bad proportions, extra limbs, disfigured, bad anatomy, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, mutated hands, fused fingers, too many fingers, long neck", 
 	    examples_images[2]
-    ]]
+    ]
+]
 
-def getExmaples():
+def getExamples():
 	return examples_list
 
 def getExamplesInfo():
