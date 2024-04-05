@@ -13,16 +13,16 @@ OUTPUT_DIR = "replace with comfyui ouput directory path"
 
 #immagini hostate su https://postimg.cc/
 garment_images = [
-    Image.open(os.path.abspath("Desktop\\pyPrograms\\armani\\arman1jacket.png")),
-    Image.open(os.path.abspath("Desktop\\pyPrograms\\armani\\arman1jacket2.png")), 
-    Image.open(os.path.abspath("Desktop\\pyPrograms\\armani\\arman1jacket3.png")), 
-    Image.open(os.path.abspath("Desktop\\pyPrograms\\armani\\arman1jacket4.png"))
+    Image.open("genai\\media\\gallery_images\\arman1jacket.png"),
+    Image.open("genai\\media\\gallery_images\\arman1jacket2.png"), 
+    Image.open("genai\\media\\gallery_images\\arman1jacket3.png"), 
+    Image.open("genai\\media\\gallery_images\\arman1jacket4.png")
     ]
 
 examples_images = [
-    Image.open(os.path.abspath("Desktop\\pyPrograms\\armani\\male_blonde_blue_arman1jacket.png")),
-    Image.open(os.path.abspath("Desktop\\pyPrograms\\armani\\female_blonde_blue_arman1jacket.png")), 
-    Image.open(os.path.abspath("Desktop\\pyPrograms\\armani\\male_ginger_blue_arman1jacket.png"))
+    Image.open("genai\\media\\generated_images\\male_blonde_blue_arman1jacket.png"),
+    Image.open("genai\\media\\generated_images\\female_blonde_blue_arman1jacket.png"), 
+    Image.open("genai\\media\\generated_images\\male_ginger_blue_arman1jacket.png")
     ]
 
 
