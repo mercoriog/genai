@@ -1,10 +1,12 @@
 from PIL import Image
+import os
 import xml.etree.ElementTree as ET
 
-EXAMPLES_XML_PATH = "genai\\source\\examples.xml"
+EXAMPLES_XML_PATH = "genai\\gui\\src\\examples\\examples.xml"
 
 def getExamples():
 	examples_list = []
+	print(os.getcwd())
 	ex_tree = ET.parse(EXAMPLES_XML_PATH)
 	ex_root = examples_tree.getroot()
 

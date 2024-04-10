@@ -1,7 +1,7 @@
 import gradio as gr
-from . import examples as ex
-from . import garments as gars
-from . import comfyui_api as comfy
+import gui.examples.examples as ex
+import gui.garments as gars
+import gui.comfyui.comfyui_api as comfy
 
 def compgetPresentation():
     presentation = gr.Markdown('''

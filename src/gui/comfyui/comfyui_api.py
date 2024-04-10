@@ -7,6 +7,7 @@ import requests
 
 # ComfyUI's API URL
 URL = "http://127.0.0.1:8188/prompt"
+WORKFLOW_JSON = "genai\\src\\gui\\comfyui\\workflow_api.json"
 
 INPUT_DIR = "replace with comfyui input dir path"
 
@@ -31,7 +32,7 @@ def startQueue(prompt_workflow):
 # main method to generate images
 def generateImage(positive_prompt, negative_prompt):
     # open the workflow.json file to set both prompts and the seed number:
-    with open("genai\\source\\workflow_api.json", "r") as file_json:
+    with open(WORKFLOW_JSON, "r") as file_json:
         # load the json file 
         prompt = json.load(file_json)
         # set positive and negative prompts
