@@ -2,13 +2,12 @@ from PIL import Image
 import os
 import xml.etree.ElementTree as ET
 
-EXAMPLES_XML_PATH = "genai\\gui\\src\\examples\\examples.xml"
+EXAMPLES_XML_PATH = "genai\\src\\gui\\examples\\examples_config.xml"
 
 def getExamples():
 	examples_list = []
-	print(os.getcwd())
 	ex_tree = ET.parse(EXAMPLES_XML_PATH)
-	ex_root = examples_tree.getroot()
+	ex_root = ex_tree.getroot()
 
 	# scroll the entire tree
 	for ex in ex_root.findall("example"):
