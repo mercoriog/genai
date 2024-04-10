@@ -8,11 +8,21 @@ garment_images = [
     Image.open("genai\\media\\gallery_images\\arman1jacket4.png")
 ]
 
+garments_list = [
+    "arman1jacket",
+    "arman1jacket2",
+    "arman1jacket3",
+    "arman1jacket4",
+]
+
 def getGarmentsList():
+    return garments_list
+
+def getGarmentsImagesList():
 	return garment_images
 
 def getGarmentDescription(item_index):
-    if item_index == 0:
-        item_index = "dark gray jacket, arman1jacket:1.2"
-    else: item_index = ""
-    return item_index
+    try:
+        return garments_list[item_index]
+    except:
+        return ""
