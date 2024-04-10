@@ -1,11 +1,12 @@
 from PIL import Image
-import os
 import xml.etree.ElementTree as ET
 
 EXAMPLES_XML_PATH = "genai\\src\\gui\\examples\\examples_config.xml"
 
 def getExamples():
 	examples_list = []
+
+	# parsing the xml file to get the entire tree structur
 	ex_tree = ET.parse(EXAMPLES_XML_PATH)
 	ex_root = ex_tree.getroot()
 
@@ -22,7 +23,7 @@ def getExamples():
 		# load the actual image
 		ex_img = Image.open(ex_img_url)
 
-		# create a list 
+		# create the correspondent list
 		examples_list.append([
 			ex_img,
 			ex_gender,
