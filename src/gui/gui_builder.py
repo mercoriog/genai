@@ -81,7 +81,7 @@ def compgetItemsGallery():
         show_label = True, 
         min_width = 320,
         height = 480, 
-        allow_preview = False,
+        allow_preview = True,
         selected_index = 0
     )
     return items_gallery
