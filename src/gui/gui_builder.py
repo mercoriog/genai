@@ -73,14 +73,21 @@ def compgetImageOutput():
     )
     return image_output
 
+def compgetAdvImageOutput():
+    adv_image_output = gr.Image(
+        label = "Generated image:",
+        height = 512
+    )
+    return adv_image_output
+
 def compgetItemsGallery():
     items_gallery = gr.Gallery(
         value = gars.getGarmentsImagesList(),
         format = "png",
         label = "Select garment:", 
         show_label = True, 
-        min_width = 320,
-        height = 480, 
+        min_width = 512,
+        height = 512, 
         allow_preview = True,
         selected_index = 0
     )
@@ -265,7 +272,7 @@ def buildGUI():
                 
                 # [NEW] VERTICAL LAYOUT:
                 with gr.Column():
-                    adv_image_output = compgetImageOutput()
+                    adv_image_output = compgetAdvImageOutput()
                 # [END] VERTICAL LAYOUT.
             # [END] HORIZONTAL LAYOUT.
             
