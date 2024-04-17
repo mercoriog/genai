@@ -1,1 +1,1 @@
-__all__ = ["gui_builder"]
+__all__ = ["gui_builder", "garments",]
