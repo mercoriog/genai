@@ -5,3 +5,5 @@ My personal work for my tesis degree about generative AI using the following tec
 - ComfyUI workflow and its API
 - Gradio API for GUI development
 - OpenCV library for image processing 
+
+Start: 18-03-2024
