@@ -201,7 +201,7 @@ def buildGUI():
                     gender_input = compgetGenderInput()
                     hair_color_input = compgetHairColorInput()
                     eyes_color_input = compgetEyesColorInput()
-                # [END] HORIZONTAL LAYOUT.
+                # [END] VERTICAL LAYOUT.
                 
                 # [NEW] VERTICAL LAYOUT:
                 with gr.Column():
@@ -294,5 +294,5 @@ def buildGUI():
                 show_progress = "minimal"
             )
 
-        # [END] TAB SECTION:
+        # [END] TAB SECTION.
         return demo
