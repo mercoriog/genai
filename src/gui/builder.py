@@ -15,21 +15,6 @@ def getOrderedGarments():
     
     return ordered_garments
 
-# combine user's choices to build the correct one and only positive prompt
-def buildPositivePrompt(gender, hair_color, eyes_color, positive_prompt, selected_item):
-    # Get gallery items names.
-    gallery_names = gal.getGalleryNames()
-
-    # Build positive prompt with user inputs.
-    fixed_positive_prompt = f"full body photo of {hair_color_input} \
-        {gender_input} model wearing {gallery_names[selected_item]}:1.2, \
-        {eyes_color_input}:1.2, \
-        realistic face, \
-        {positive_prompt}"
-    
-    # Return correct positive prompt.
-    return fixed_positive_prompt
-
 # GUI builder method:
 def buildGUI():
     with gr.Blocks(title = "Txt-to-img generator") as demo:
@@ -56,7 +41,10 @@ def buildGUI():
 
             # [NEW] HORIZONTAL LAYOUT:
             with gr.Row():
+                # Get avaible images in gallery.
                 gallery_images = gal.getGalleryImages()
+
+                # Create gallery with retrived avaible images.
                 items_gallery = comp.getItemsGallery(gallery_images)
                 image_output = comp.getImageOutput()
             # [END] HORIZONTAL LAYOT.
@@ -67,20 +55,42 @@ def buildGUI():
                 generate_button = comp.getGenerateButton()
             # [END] HORIZONTAL LAYOUT.
 
+            # Retrive avaible examples.
             avaible_examples = ex.getExamples()
 
+            # Build examples gallery from avaible examples.
             examples_gallery = comp.getExamplesGallery(image_output, gender_input, hair_color_input, eyes_color_input, positive_prompt, negative_prompt,avaible_examples)
 
-            # combine user's choices to build positive prompt:
-            fixed_positive_prompt = buildPositivePrompt(gender_input, hair_color_input, eyes_color_input, positive_prompt, items_gallery)
+            # Fake component to store selected item in gallery.
+            selected_item_gallery = comp.getSelItemGallery()
             
-            # fake component to store fixed positive prompt
-            fixed_component = comp.getFixedComponent(fixed_positive_prompt)
+            def getSelectItemGallery(evt: gr.SelectData):
+                return evt.index
+
+            # Select item in gallery event:
+            items_gallery.select(
+                fn = getSelectItemGallery, 
+                inputs = None, 
+                outputs = selected_item_gallery
+            )
+
+            # combine user's choices to build positive prompt:
+            # fixed_positive_prompt = buildPositivePrompt(gender_input, hair_color_input, eyes_color_input, positive_prompt, selected_item_gallery)
+            
+            # Fake component to store fixed positive prompt.
+            # fixed_component = comp.getFixedComponent(fixed_positive_prompt)
 
             # generate image event:
             generate_button.click(
                 fn = comfy.generateImage, 
-                inputs = [fixed_component, negative_prompt],
+                inputs = [
+                    gender_input, 
+                    hair_color_input, 
+                    eyes_color_input, 
+                    positive_prompt, 
+                    selected_item_gallery, 
+                    negative_prompt
+                ],
                 outputs = [image_output],
                 scroll_to_output = True,
                 show_progress = "minimal"

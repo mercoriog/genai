@@ -143,3 +143,7 @@ def getFixedComponent(fixed_positive_prompt):
         render = False
     )
     return fixed_component
+
+def getSelItemGallery():
+    selected_index_textbox = gr.Textbox(value="0", visible = False)
+    return selected_index_textbox

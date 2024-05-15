@@ -1,6 +1,7 @@
 from gallery import repository as gallib
 from PIL import Image
 from pathlib import Path
+import os
 
 def extractNameNoExt(filename):
     # This function extract the exact name of the file (without extension).
@@ -13,8 +14,11 @@ def getGalleryNames():
     # Create an empty gallery names list.
     gallery_names = []
 
+    # List all images in gallery folder.
+    gallery_images = os.listdir(gallery_folder)
+    
     # For each image in gallery folder.
-    for image in gallery_folder:
+    for image in gallery_images:
         # Extract current gallery's image name.
         name = extractNameNoExt(image)
 
@@ -28,13 +32,22 @@ def getGalleryImages():
     # Get 'gallery' folder path.
     gallery_folder = gallib.getFolderPath()
 
+    # List all images in gallery folder.
+    gallery_images = os.listdir(gallery_folder)
+
+    # Create an empty list for loaded image.
+    loaded_list = []
+
     # For each image in gallery folder.
-    for image in gallery_folder:
+    for image in gallery_images:
+        # Get the correct image path.
+        image_path = os.path.join(gallery_folder, image)
+
         # Load image.
-        loaded_image = Image.open(image)
+        loaded_image = Image.open(image_path)
 
         # Add to gallery images list.
-        gallery_images.append(loaded_image)
-
+        loaded_list.append(loaded_image)
+        
     # Return gallery loaded images list.
-	return gallery_images
+    return loaded_list

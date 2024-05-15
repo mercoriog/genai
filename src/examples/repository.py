@@ -1,4 +1,5 @@
 from repository import examples as exlib
+import os
 
 EXAMPLES_XML = "examples.xml"
 

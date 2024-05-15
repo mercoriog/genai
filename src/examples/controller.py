@@ -2,20 +2,19 @@ from PIL import Image
 from examples import repository as repo
 from repository import preview as prev
 import xml.etree.ElementTree as ET
-
-def extractNameNoExt(filename):
-    # This function extract the exact name of the file (without extension).
-    return Path(filename).stem
+import os
 
 def getExImagePath(image_name):
 	# Get 'preview' folder path.
-	preview_folder_path = prev.getPreviewFolderPath()
+	preview_folder_path = prev.getFolderPath()
 
-	for preview in preview_folder_path:
-		preview_name = extractNameNoExt(preview)
+	# List all images in preview folder.
+	preview_images = os.listdir(preview_folder_path)
 
-		if preview_name == image_name:
-			return preview
+	for preview in preview_images:
+		if preview == image_name:
+			preview_path = os.path.join(preview_folder_path, preview)
+			return preview_path
 
 	return ""
 
@@ -47,7 +46,7 @@ def getExamples():
 			ex_eyes_color = ex.findtext("eyes-color")
 			ex_positive_prompt = ex.findtext("positive-prompt")
 			ex_negative_prompt = ex.findtext("negative-prompt")
-			
+
 			# Load the actual image.
 			ex_img = Image.open(ex_img_url)
 
@@ -60,12 +59,11 @@ def getExamples():
 				ex_positive_prompt,
 				ex_negative_prompt
 			])
-
 	# An error occurs:
 	except Exception as e:
 		# Print the exception.
-        print("[ERROR] " + str(e))
-        
-  	# Return an empty list if any error occurs.
+		print("[ERROR] " + str(e))
+
+	# Return an empty list if any error occurs.
 	return examples_list
 
