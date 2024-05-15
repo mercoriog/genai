@@ -1,5 +1,8 @@
-import gui.gui_builder as build
+from gui import builder
 
-# controlla try catch statement
-demo = build.buildGUI()
-demo.launch(share = False)
+if __name__ == "__main__":
+	# Build GUI.
+	demo = builder.buildGUI()
+
+	# Launch GUI.
+	demo.launch(share = False)

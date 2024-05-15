@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <examples>
 	<example>
-		<image-url>genai\media\generated_images\male_blonde_blue_arman1jacket.png</image-url>
+		<image-name>male_blonde_blue_arman1jacket.png</image-name>
 		<gender>Male</gender>
 		<hair-color>Blonde</hair-color>
 		<eyes-color>Blue</eyes-color>
@@ -9,7 +9,7 @@
 		<negative-prompt>(worst quality, greyscale), ac_neg2, zip2d_neg, ziprealism_neg, watermark, username, signature, text, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, jpeg artifacts, bad feet, extra fingers, mutated hands, poorly drawn hands, bad proportions, extra limbs, disfigured, bad anatomy, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, mutated hands, fused fingers, too many fingers, long neck</negative-prompt>
 	</example>
 	<example>
-		<image-url>genai\media\generated_images\female_blonde_blue_arman1jacket.png</image-url>
+		<image-name>female_blonde_blue_arman1jacket.png</image-name>
 		<gender>Female</gender>
 		<hair-color>Blonde</hair-color>
 		<eyes-color>Blue</eyes-color>
@@ -17,7 +17,7 @@
 		<negative-prompt>(worst quality, greyscale), ac_neg2, zip2d_neg, ziprealism_neg, watermark, username, signature, text, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, jpeg artifacts, bad feet, extra fingers, mutated hands, poorly drawn hands, bad proportions, extra limbs, disfigured, bad anatomy, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, mutated hands, fused fingers, too many fingers, long neck, black and white filter</negative-prompt>
 	</example>
 	<example>
-		<image-url>genai\media\generated_images\male_ginger_blue_arman1jacket.png</image-url>
+		<image-name>male_ginger_blue_arman1jacket.png</image-name>
 		<gender>Male</gender>
 		<hair-color>Ginger</hair-color>
 		<eyes-color>Blue</eyes-color>
