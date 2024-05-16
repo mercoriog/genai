@@ -87,29 +87,10 @@ def startQueue(prompt_workflow):
     # If no error occurs, return True
     return True
 
-# combine user's choices to build the correct one and only positive prompt
-def buildPositivePrompt(gender, hair_color, eyes_color, positive_prompt, gallery_item):
-    # Get gallery items names.
-    gallery_names = gal.getGalleryNames()
-    
-    # Build positive prompt with user inputs.
-    fixed_positive_prompt = f"full body photo of {hair_color} \
-        {gender} model wearing {gallery_names[gallery_item]}:1.2, \
-        {eyes_color}:1.2, \
-        realistic face, \
-        {positive_prompt}"
-    
-    # Return correct positive prompt.
-    return fixed_positive_prompt
-
-def generateImage(gender, hair_color, eyes_color, positive_prompt, gallery_item, negative_prompt):
+def generateImage(positive_prompt, negative_prompt):
     # This function generate a new image using positive and negative prompt.
     # It process a request to comfyui API using both prompts
     # and check for new generated image stored in output folder.
-    print(gallery_item)
-    
-    positive_prompt = buildPositivePrompt(gender, hair_color, eyes_color, positive_prompt, gallery_item)
-
 
     # Get ComfyUI output folder.
     output_folder = repo.getOutputFolderPath()
