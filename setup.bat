@@ -29,8 +29,11 @@ if %errorlevel% neq 0 (
     echo [SETUP] pip is installed.
 )
 
+REM Set my virtual environment name.
+set "virtualenv_name=env"
+
 REM Create virtual environment
-python -m venv env
+python -m venv %virtualenv_name%
 if exist env (
     echo [SETUP] Virtual environment created successfully.
 ) else (

@@ -7,7 +7,7 @@ script_path=$(readlink -f "$0")
 script_dir=$(dirname "$script_path")
 
 # Set virtual environment name.
-env_name="genai_env"
+env_name="env"
 
 # Get env name.
 env_path="${script_dir}/${env_name}"
