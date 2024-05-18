@@ -12,7 +12,7 @@ REM Set correct directory where to store 'env'.
 set "venv_path=%script_dir%%virtualenv_name%"
 
 REM Activate virtual environment.
-echo [START] Start 'genai.py'...
+echo [START] Start 'genai'...
 %venv_path%\Scripts\python %script_dir%src\main.py
 
 

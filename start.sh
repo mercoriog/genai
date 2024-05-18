@@ -12,5 +12,5 @@ env_name="env"
 # Get env name.
 env_path="${script_dir}/${env_name}"
 
-echo "[START] Start 'genai.py'..."
+echo "[START] Start 'genai'..."
 ${env_path}/bin/python3 $script_dir/src/main.py
