@@ -52,6 +52,19 @@ def getGalleryImages():
     # Return gallery loaded images list.
     return loaded_list
 
+def getOrderedImages():
+    garments_list = getGalleryImages()
+    garments_name = getGalleryNames()
+    ordered_garments = []
+    count = 0
+
+    for item in garments_list:
+        ordered_garments.append((item, garments_name[count]))
+        count += 1
+    
+    return ordered_garments
+
+
 def getOrderedGarments():
     garments_list = getGalleryNames()
     ordered_garments = []

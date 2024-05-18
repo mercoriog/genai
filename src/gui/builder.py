@@ -1,12 +1,5 @@
 import gradio as gr
-from component import button 
-from component import example  
-from component import highlightedText
-from component import image  
-from component import markdown 
-from component import radio 
-from component import gallery 
-from component import textbox
+from .component import *
 from examples import controller as ctrlEx
 from gallery import controller as ctrlGal
 from gui import script
@@ -38,7 +31,7 @@ def buildGUI():
             # [NEW] HORIZONTAL LAYOUT:
             with gr.Row():
                 # Get avaible images in gallery.
-                gallery_images = ctrlGal.getGalleryImages()
+                gallery_images = ctrlGal.getOrderedImages()
 
                 # Create gallery with retrived avaible images.
                 items_gallery = gallery.getItemsGallery(gallery_images)
@@ -58,7 +51,7 @@ def buildGUI():
             exampleBox = (image_output, gender_input, hair_color_input, eyes_color_input, positive_prompt, negative_prompt,avaible_examples)
 
             # Build examples gallery from avaible examples.
-            examples_gallery = example.getExamplesGallery(examplebox)
+            examples_gallery = example.getExamplesGallery(exampleBox)
 
             # Fake component to store selected item in gallery.
             selected_item_gallery = textbox.getSelItemGallery()
@@ -75,7 +68,7 @@ def buildGUI():
 
             # generate image event:
             generate_button.click(
-                fn = script.generateImage, 
+                fn = script.generate, 
                 inputs = [
                     gender_input, 
                     hair_color_input, 
@@ -119,7 +112,7 @@ def buildGUI():
 
             # generate image event:
             adv_generate_button.click(
-                fn = script.generateImage,
+                fn = script.generate,
                 inputs = [adv_positive_prompt, adv_negative_prompt],
                 outputs = [adv_image_output],
                 scroll_to_output = True,

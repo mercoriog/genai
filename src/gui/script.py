@@ -8,7 +8,7 @@ def buildPositivePrompt(gender, hair_color, eyes_color, positive_prompt, gallery
     
     # Build positive prompt with user inputs.
     fixed_positive_prompt = f"full body photo of {hair_color} \
-        {gender} model wearing {gallery_names[gallery_item]}:1.2, \
+        {gender} model wearing {gallery_names[int(gallery_item)]}:1.2, \
         {eyes_color}:1.2, \
         realistic face, \
         {positive_prompt}"

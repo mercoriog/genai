@@ -9,7 +9,7 @@ def getItemsGallery(gallery_images):
         min_width = 512,
         height = 512, 
         allow_preview = True,
-        selected_index = 0
+        interactive = True
     )
     return items_gallery
 
