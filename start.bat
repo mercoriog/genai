@@ -8,7 +8,7 @@ set "script_dir=%~dp0"
 REM Set my virtual environment name.
 set "virtualenv_name=env"
 
-REM Set correct directory where to store 'genaienv'.
+REM Set correct directory where to store 'env'.
 set "venv_path=%script_dir%%virtualenv_name%"
 
 REM Activate virtual environment.
