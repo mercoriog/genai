@@ -3,14 +3,15 @@ import gradio as gr
 def getPresentation():
     presentation = gr.Markdown('''
         # StableDiffusion - LoRA image generator.
-        Compile both positive and negative prompt to generate an image with selected garment.
-        Select model's traits using radio buttons choices.
+        Compile both positive and negative prompt to tell AI Model what you want to generate. \n
+        Selecting an item from gallery will automatically insert the correct token in positive prompt. \n
+        Click 'Generate image' button to perform the generation request.
     ''')
     return presentation
 
-def getAdvPresentation():
+def getSettingsPresentation():
     presentation = gr.Markdown('''
         # StableDiffusion - LoRA image generator.
-        Compile both positive and negative prompt to generate an image.
+        Set workflow api settings.
     ''')
     return presentation

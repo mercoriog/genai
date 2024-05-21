@@ -11,10 +11,17 @@ def getExImagePath(image_name):
 	# List all images in preview folder.
 	preview_images = os.listdir(preview_folder_path)
 
-	for preview in preview_images:
-		if preview == image_name:
-			preview_path = os.path.join(preview_folder_path, preview)
-			return preview_path
+	# For each basename from folder path: 
+	for preview_basename in preview_images:
+		
+		# Check if basename is equal target image name.
+		if preview_basename == image_name:
+			
+			# Target image file found. Get the correct path.
+			preview_file_path = os.path.join(preview_folder_path, preview_basename)
+			
+			# Return absolute path of target image file (founded in 'preview' folder)
+			return preview_file_path
 
 	return ""
 
@@ -41,10 +48,10 @@ def getExamples():
 			# Retrive url from image name.
 			ex_img_url = getExImagePath(ex_img_name)
 			
-			ex_gender = ex.findtext("gender")
-			ex_hair_color = ex.findtext("hair-color")
-			ex_eyes_color = ex.findtext("eyes-color")
+			# Retrive positive prompt text.
 			ex_positive_prompt = ex.findtext("positive-prompt")
+			
+			# Retrive negative prompt text.
 			ex_negative_prompt = ex.findtext("negative-prompt")
 
 			# Load the actual image.
@@ -53,9 +60,6 @@ def getExamples():
 			# Add loaded example to list.
 			examples_list.append([
 				ex_img,
-				ex_gender,
-				ex_hair_color,
-				ex_eyes_color,
 				ex_positive_prompt,
 				ex_negative_prompt
 			])

@@ -6,57 +6,67 @@ from gui import script
 
 # GUI builder method:
 def buildGUI():
+    
+    # Define gradio GUI body:
     with gr.Blocks(title = "Txt-to-img generator") as demo:
+        
         # [NEW] TAB SECTION:
-        with gr.Tab("Standard"):
+        with gr.Tab("Generator"):
+            
             # TEXTUAL DESCRIPTION:
             presentation = markdown.getPresentation()
 
+            # [NEW] DYNAMIC SECTION:
+            with gr.Accordion(label = "Select item", open = False):
+                # Get avaible images in gallery.
+                gallery_images = ctrlGal.getOrderedImages()
+            
+                # Create gallery with retrived avaible images.
+                items_gallery = gallery.getItemsGallery(gallery_images)
+            # [END] DYNAMIC SECTION:
+            
             # [NEW] HORIZONTAL LAYOUT:
             with gr.Row():
-                # [NEW] VERTICAL LAYOUT:
-                with gr.Column():
-                    gender_input = radio.getGenderInput()
-                    hair_color_input = radio.getHairColorInput()
-                    eyes_color_input = radio.getEyesColorInput()
-                # [END] VERTICAL LAYOUT.
-                
-                # [NEW] VERTICAL LAYOUT:
-                with gr.Column():
-                    positive_prompt = textbox.getPositivePrompt()
-                    negative_prompt = textbox.getNegativePrompt()
-                # [END] VERTICAL LAYOUT.
+
+                # Set positive prompt input textbox.
+                positive_prompt = textbox.getPositivePrompt()
+
+                # Set negative prompt input textbox.
+                negative_prompt = textbox.getNegativePrompt()
+            
             # [END] HORIZONTAL LAYOUT.
 
             # [NEW] HORIZONTAL LAYOUT:
             with gr.Row():
-                # Get avaible images in gallery.
-                gallery_images = ctrlGal.getOrderedImages()
 
-                # Create gallery with retrived avaible images.
-                items_gallery = gallery.getItemsGallery(gallery_images)
+                # Set output image box.
                 image_output = image.getImageOutput()
+
+                # Retrive avaible examples.
+                avaible_examples = ctrlEx.getExamples()
+
+                # Build examples gallery from avaible examples.
+                examples_gallery = example.getExamplesGallery(image_output, positive_prompt, negative_prompt,avaible_examples)
+                
             # [END] HORIZONTAL LAYOT.
 
             # [NEW] HORIZONTAL LAYOUT:
             with gr.Row():
-                clear_button = button.getStandardClearButton(positive_prompt, negative_prompt, image_output)
+
+                # Set button to perform request.
                 generate_button = button.getGenerateButton()
+
+                # Set clear button to clear components data.
+                clear_button = button.getStandardClearButton(positive_prompt, negative_prompt, image_output)
+            
             # [END] HORIZONTAL LAYOUT.
-
-            # Retrive avaible examples.
-            avaible_examples = ctrlEx.getExamples()
-
-            # Build exampleBox.
-            exampleBox = (image_output, gender_input, hair_color_input, eyes_color_input, positive_prompt, negative_prompt,avaible_examples)
-
-            # Build examples gallery from avaible examples.
-            examples_gallery = example.getExamplesGallery(exampleBox)
 
             # Fake component to store selected item in gallery.
             selected_item_gallery = textbox.getSelItemGallery()
             
+            # Inner function to handle selected item event:
             def getSelectItemGallery(evt: gr.SelectData):
+                # Return gallery item index.
                 return evt.index
 
             # Select item in gallery event:
@@ -66,13 +76,10 @@ def buildGUI():
                 outputs = selected_item_gallery
             )
 
-            # generate image event:
+            # Generate image event:
             generate_button.click(
                 fn = script.generate, 
                 inputs = [
-                    gender_input, 
-                    hair_color_input, 
-                    eyes_color_input, 
                     positive_prompt, 
                     selected_item_gallery, 
                     negative_prompt
@@ -85,39 +92,31 @@ def buildGUI():
         # [END] TAB SECTION.
 
         # [NEW] TAB SECTION:
-        with gr.Tab("Advanced"):
-            adv_presentation = markdown.getAdvPresentation()
-            # [NEW] HORIZONTAL LAYOUT:
-            with gr.Row():
-                # [NEW] VERTICAL LAYOUT:
-                with gr.Column():
-                    adv_positive_prompt = textbox.getPositivePrompt()
-                    adv_negative_prompt = textbox.getNegativePrompt()
+        with gr.Tab("Settings"):
+            # Settings Tab description.
+            settings_presentation = markdown.getSettingsPresentation()
 
-                    ordered_garments = ctrlGal.getOrderedGarments()
-                    avaible_garments_list = highlightedText.getAvaibleGramentsList(ordered_garments)
-                # [END] VERTICAL LAYOUT.
-                
-                # [NEW] VERTICAL LAYOUT:
-                with gr.Column():
-                    adv_image_output = image.getAdvImageOutput()
-                # [END] VERTICAL LAYOUT.
-            # [END] HORIZONTAL LAYOUT.
-            
-            # [NEW] HORIZONTAL LAYOUT:
-            with gr.Row():
-                adv_clear_button = button.getAdvancedClearButton(adv_positive_prompt, adv_negative_prompt)
-                adv_generate_button = button.getGenerateButton()
-            # [END] HORIZONTAL LAYOUT.
+            # Textbot to insert coustom ComfyUI URL:
+            comfyURL_textbox = textbox.getComfyURLTextbox()
 
-            # generate image event:
-            adv_generate_button.click(
-                fn = script.generate,
-                inputs = [adv_positive_prompt, adv_negative_prompt],
-                outputs = [adv_image_output],
-                scroll_to_output = True,
-                show_progress = "minimal"
+            # File uploader for .json workflow file.
+            workflow_file = file.getWorkflowFile()
+
+            # Textbox to insert local ComfyUI output folder.
+            comfyOutput_textbox = textbox.getComfyOutputTextbox()
+
+            # Set update button.
+            update_settings_button = button.getUpdateSettingsButton()
+
+            # Update button event:
+            update_settings_button.click(
+                fn = script.updateSettings, 
+                inputs = [comfyURL_textbox, comfyOutput_textbox, workflow_file],
+                outputs = None
             )
+
+            # Set clear button.
+            clear_settings_button = button.getClearSettingsButton(comfyURL_textbox, comfyOutput_textbox, workflow_file)
 
         # [END] TAB SECTION.
         return demo

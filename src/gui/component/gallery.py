@@ -5,11 +5,12 @@ def getItemsGallery(gallery_images):
         value = gallery_images,
         format = "png",
         label = "Select garment:", 
-        show_label = True, 
+        show_label = True,
         min_width = 512,
-        height = 512, 
+        columns = 4,
+        height = 512,
         allow_preview = True,
-        interactive = True
+        interactive = False
     )
     return items_gallery
 

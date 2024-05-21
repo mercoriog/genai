@@ -1,70 +1,12 @@
-from comfyui import repository as repo
+from comfyui import output as comfyOUT
+from comfyui import comfyURL
+from comfyui import workflow as comfyWORK
 from gallery import controller as gal
 import json
 import os
-import time
-import random
-import numpy as np
 import requests
 
-def getLatestImage(folder):
-	# This function check for the latest image stored in input folder.
-
-	# Retrive all files in folder.
-    files = os.listdir(folder)
-    
-    # Filter image format file.
-    image_files = [f for f in files if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
-    
-    # Sort images from time.
-    image_files.sort(key=lambda x: os.path.getmtime(os.path.join(folder, x)))
-    
-    # Get latest image as last item in <image_files> list.
-    latest_image = os.path.join(folder, image_files[-1]) if image_files else None
-    
-    # Return latest image of input folder.
-    return latest_image
-
-def updateWorkflow(positive_prompt, negative_prompt):
-    # This function updates the comfyui workflow json file using provided
-    # positive and negative prompt.
-    # This function also set a random seed for image generation.
-
-    # Get workflow file.
-    workflow_file = repo.getWorkflowFilePath()
-
-    # Set an exception handler:
-    try:
-        # Open the workflow json file.
-        file_json = open(workflow_file, "r")
-
-        # Load json file.
-        prompt = json.load(file_json)
-
-        # Set positive prompt.
-        prompt["6"]["inputs"]["text"] = f"{positive_prompt}"
-
-        # Set negative prompt.
-        prompt["7"]["inputs"]["text"] = f"{negative_prompt}"
-
-        # Set a random seed that maps one image biunivocally.
-        prompt["3"]["inputs"]["seed"] = random.randint(1, 1500000)
-
-        # Close workflow file.
-        file_json.close()
-
-    # An error occurs:
-    except Exception as e:
-        # Print the exception.
-        print("[ERROR] " + str(e))
-
-        # Return False if error occurs.
-        return None
-
-    # If no error occurs, return the processed prompt json file. 
-    return prompt
-
-def startQueue(prompt_workflow):
+def startQueue(prompt_workflow, URL):
     # Set an exception handler:
     try:
         # Build request body.
@@ -87,24 +29,62 @@ def startQueue(prompt_workflow):
     # If no error occurs, return True
     return True
 
+
+def performGeneration(prompt_workflow, URL):
+    # Set an exception handler:
+    try:
+        # Build request body.
+        body = {"prompt": prompt_workflow}
+
+        # Encode body to process request.
+        data = json.dumps(body).encode('utf-8')
+
+        # Process request.
+        with request.post(URL, data=data) as response:
+            # Read response.
+            response_data = response.read().decode('utf-8')
+            # Convert json response as dict.
+            response_dict = json.loads(response_data)
+
+        # Return response body as dict.
+        return response_dict
+
+    # An error occurs:
+    except Exception as e:
+        # Print the exception.
+        print("[ERROR] " + str(e))
+
+        # Return False if error occurs.
+        return None
+
+    # If no error occurs, return True
+    return True
+
+
 def generateImage(positive_prompt, negative_prompt):
     # This function generate a new image using positive and negative prompt.
     # It process a request to comfyui API using both prompts
     # and check for new generated image stored in output folder.
 
+    # Get ComfyUI API URL.
+    URL = comfyURL.getURL()
+
     # Get ComfyUI output folder.
-    output_folder = repo.getOutputFolderPath()
+    output_folder = comfyOUT.getOutputFolderPath()
 
     # Get latest image in folder before generating new one 
     # and storing it in the same folder.
     # This latest image will be the [OLD]_latest_image.
-    previous_image = getLatestImage(output_folder)
+    previous_image = comfyOUT.getLatestImage(output_folder)
 
-    # Update workflow file with positive and negative prompt:
-    prompt = updateWorkflow(positive_prompt, negative_prompt)
+    # Get workflow file.
+    workflow_file = comfyWORK.getWorkflowFilePath()
+
+    # Update workflow file with positive and negative prompt.
+    prompt = comfyWORK.updateWorkflow(positive_prompt, negative_prompt, workflow_file)
 
     # Call the API to generate the image.
-    startQueue(prompt)
+    startQueue(prompt, URL)
 
     # Process until the new generated image is stored in output folder.
     while True:

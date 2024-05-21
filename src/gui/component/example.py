@@ -1,25 +1,15 @@
 import gradio as gr
 
-def getExamplesGallery(examplebox):
-    # <examplebox> prevede è una 7-pla contenente:
-    # 0 - image_output
-    # 1 - gender_input
-    # 2 - hair_color_input
-    # 3 - eyes_color_input 
-    # 4 - positive_prompt 
-    # 5 - negative_prompt
-    # 6 - examples
+def getExamplesGallery(image_output, positive_prompt, negative_prompt, avaible_examples):
 
     examples_gallery = gr.Examples(
-        examples = examplebox[6],
+        examples = avaible_examples,
         inputs = [
-            examplebox[0],
-            examplebox[1], 
-            examplebox[2], 
-            examplebox[3], 
-            examplebox[4], 
-            examplebox[5]
+            image_output,
+            positive_prompt,
+            negative_prompt
         ],
+        examples_per_page = 1,
         label = "Examples:"
     )
     return examples_gallery

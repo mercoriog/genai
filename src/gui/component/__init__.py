@@ -1,8 +1,8 @@
 __all__ = [
 	"button",
 	"example",
+	"file",
 	"gallery",
-	"highlightedText",
 	"image",
 	"markdown",
 	"radio",
