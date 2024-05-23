@@ -20,5 +20,5 @@ def generate(positive_prompt, gallery_item, negative_prompt):
 
 	return generated_image
 
-def updateSettings(comfyURL_textbox, comfyOutput_textbox, workflow_file):
+def updateSettings(comfyURL_textbox, workflow_file):
     gr.Info("Settings updated.")

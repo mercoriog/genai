@@ -18,11 +18,13 @@ def buildGUI():
 
             # [NEW] DYNAMIC SECTION:
             with gr.Accordion(label = "Select item", open = False):
+                
                 # Get avaible images in gallery.
                 gallery_images = ctrlGal.getOrderedImages()
             
                 # Create gallery with retrived avaible images.
                 items_gallery = gallery.getItemsGallery(gallery_images)
+            
             # [END] DYNAMIC SECTION:
             
             # [NEW] HORIZONTAL LAYOUT:
@@ -93,6 +95,7 @@ def buildGUI():
 
         # [NEW] TAB SECTION:
         with gr.Tab("Settings"):
+            
             # Settings Tab description.
             settings_presentation = markdown.getSettingsPresentation()
 
@@ -102,21 +105,19 @@ def buildGUI():
             # File uploader for .json workflow file.
             workflow_file = file.getWorkflowFile()
 
-            # Textbox to insert local ComfyUI output folder.
-            comfyOutput_textbox = textbox.getComfyOutputTextbox()
-
             # Set update button.
             update_settings_button = button.getUpdateSettingsButton()
 
             # Update button event:
             update_settings_button.click(
                 fn = script.updateSettings, 
-                inputs = [comfyURL_textbox, comfyOutput_textbox, workflow_file],
+                inputs = [comfyURL_textbox, workflow_file],
                 outputs = None
             )
 
             # Set clear button.
-            clear_settings_button = button.getClearSettingsButton(comfyURL_textbox, comfyOutput_textbox, workflow_file)
+            clear_settings_button = button.getClearSettingsButton(comfyURL_textbox, workflow_file)
 
         # [END] TAB SECTION.
+        
         return demo

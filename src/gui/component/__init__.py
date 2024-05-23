@@ -5,6 +5,5 @@ __all__ = [
 	"gallery",
 	"image",
 	"markdown",
-	"radio",
 	"textbox"
 	]

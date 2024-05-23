@@ -43,12 +43,3 @@ def getComfyURLTextbox():
         interactive = True
     )
     return comfyURL_textbox
-
-def getComfyOutputTextbox():
-    comfyOutput = gr.Textbox(
-        lines = 1,
-        label = "ComfyUI local folder path",
-        placeholder = "Tyoe running ComfyUI folder path.",
-        show_copy_button = True,
-        interactive = True
-    )

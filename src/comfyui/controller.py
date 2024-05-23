@@ -5,6 +5,7 @@ from gallery import controller as gal
 import json
 import os
 import requests
+import time
 
 def startQueue(prompt_workflow, URL):
     # Set an exception handler:
@@ -28,38 +29,6 @@ def startQueue(prompt_workflow, URL):
 
     # If no error occurs, return True
     return True
-
-
-def performGeneration(prompt_workflow, URL):
-    # Set an exception handler:
-    try:
-        # Build request body.
-        body = {"prompt": prompt_workflow}
-
-        # Encode body to process request.
-        data = json.dumps(body).encode('utf-8')
-
-        # Process request.
-        with request.post(URL, data=data) as response:
-            # Read response.
-            response_data = response.read().decode('utf-8')
-            # Convert json response as dict.
-            response_dict = json.loads(response_data)
-
-        # Return response body as dict.
-        return response_dict
-
-    # An error occurs:
-    except Exception as e:
-        # Print the exception.
-        print("[ERROR] " + str(e))
-
-        # Return False if error occurs.
-        return None
-
-    # If no error occurs, return True
-    return True
-
 
 def generateImage(positive_prompt, negative_prompt):
     # This function generate a new image using positive and negative prompt.
