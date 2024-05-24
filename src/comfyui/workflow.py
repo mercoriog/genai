@@ -2,6 +2,7 @@ from repository import comfyui as comfylib
 import os
 import random
 import json
+import shutil
 
 # Workflow api json file name.
 WORKFLOW_JSON = "workflow_api.json"
@@ -51,3 +52,11 @@ def updateWorkflow(positive_prompt, negative_prompt, workflow_file):
 
     # If no error occurs, return the processed prompt json file. 
     return prompt
+
+def saveWorkflow(workflow_file):
+    # Get 'comfyui' folder path.
+    comfyui_folder_path = comfylib.getFolderPath()
+
+    # Get 'comfyui'
+    # 
+    shutil.copy(workflow_file)

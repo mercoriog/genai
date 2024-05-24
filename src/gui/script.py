@@ -14,11 +14,13 @@ def buildPositivePrompt(positive_prompt, gallery_item):
     return fixed_positive_prompt
 
 def generate(positive_prompt, gallery_item, negative_prompt):
-	positive_prompt = buildPositivePrompt(positive_prompt, gallery_item)
+    if gallery_item:
+	   positive_prompt = buildPositivePrompt(positive_prompt, gallery_item)
 	
 	generated_image = ctrlComfy.generateImage(positive_prompt, negative_prompt)
 
 	return generated_image
 
 def updateSettings(comfyURL_textbox, workflow_file):
+    ctrlComfy.changeWorkflow(workflow_file)
     gr.Info("Settings updated.")
