@@ -37,9 +37,19 @@ def getSelItemGallery():
 def getComfyURLTextbox():
     comfyURL_textbox = gr.Textbox(
         lines = 1,
-        label = "ComfyUI URL",
-        placeholder = "Type running ComfyUI URL. Leave blank to use default URL: 'http://127.0.0.1:8188/prompt'",
+        label = "Change ComfyUI URL",
+        placeholder = "Type running target ComfyUI URL. ComfyUI default URL: 'http://127.0.0.1:8188/prompt'",
         show_copy_button = True,
         interactive = True
+    )
+    return comfyURL_textbox
+
+def getCurrentURLtextbox(currentURL):
+    comfyURL_textbox = gr.Textbox(
+        value = currentURL,
+        lines = 1,
+        label = "Current ComfyUI URL",
+        show_copy_button = True,
+        interactive = False
     )
     return comfyURL_textbox

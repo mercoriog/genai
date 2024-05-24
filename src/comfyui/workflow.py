@@ -17,6 +17,16 @@ def getWorkflowFilePath():
     # Return Workflow file path.
     return workflow_file_path
 
+def getUserWorkflowFilePath():
+    # Get 'comfyui' folder path.
+    comfyui_folder_path = comfylib.getFolderPath()
+
+    # Build user_workflow file path.
+    user_workflow_path = os.path.join(comfyui_folder_path, "user_" + WORKFLOW_JSON)
+
+    # Return user workflow file path.
+    return user_workflow_path
+
 def updateWorkflow(positive_prompt, negative_prompt, workflow_file):
     # This function updates the comfyui workflow json file using provided
     # positive and negative prompt.
@@ -53,10 +63,38 @@ def updateWorkflow(positive_prompt, negative_prompt, workflow_file):
     # If no error occurs, return the processed prompt json file. 
     return prompt
 
-def saveWorkflow(workflow_file):
-    # Get 'comfyui' folder path.
-    comfyui_folder_path = comfylib.getFolderPath()
+def saveNewWorkflow(workflow_file):
+    # Set an exception handler:
+    try:
+        user_workflow_path = getUserWorkflowFilePath()
+        
+        # Save user workflow. 
+        shutil.copy(workflow_file, user_workflow_path)
 
-    # Get 'comfyui'
-    # 
-    shutil.copy(workflow_file)
+        # Return True if copy operation done.
+        return True
+
+     # An error occurs:
+    except Exception as e:
+        # Print the exception.
+        print("[ERROR] " + str(e))
+
+        # Return False if error occurs.
+        return False
+
+def getCurrentWorkflow():
+    # Get user workflow file path.
+    user_workflow_path = getUserWorkflowFilePath()
+
+    # Get provide workflow file path.
+    provided_workflow = getWorkflowFilePath()
+
+    if os.path.exists(user_workflow_path):
+        return user_workflow_path
+    else:
+        return provided_workflow
+
+
+
+
+

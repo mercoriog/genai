@@ -52,5 +52,19 @@ def generateWebSocketImage(positive_prompt, negative_prompt):
     # Return generated image (can be None if an error occurs).
     return image
     
-def changeWorkflow(workflow_file):
-    pass
+def saveWorkflow(workflow_file):
+    # Save user workflow.
+    return comfyWORK.saveNewWorkflow(workflow_file)
+
+def saveURL(URL):
+    # Save user workflow.
+    return comfyURL.saveNewURL(URL)
+
+def getProvidedWorkflow():
+    return comfyWORK.getWorkflowFilePath()
+
+def getCurrentWorkflow():
+    return comfyWORK.getCurrentWorkflow()
+
+def getCurrentURL():
+    return comfyURL.getURL()

@@ -95,9 +95,24 @@ def buildGUI():
 
         # [NEW] TAB SECTION:
         with gr.Tab("Settings"):
-            
             # Settings Tab description.
             settings_presentation = markdown.getSettingsPresentation()
+            
+            with gr.Accordion("Current settings:", open = False):
+                # Get URL.
+                currentURL= script.getCurrentURL()
+
+                # Display URL.
+                currentURL_textbox = textbox.getCurrentURLtextbox(currentURL)
+
+                # Get Current Workflow.
+                currentWorkflow_json = script.getJSONCurrentWorkflow()
+
+                # Display current Workflow.
+                workflow_json_show = JSON.getWorkflowJSON(currentWorkflow_json)
+
+            # Change setting presentation.
+            change_setting_presentation = markdown.getChangeSettingMarkdown()
 
             # Textbot to insert coustom ComfyUI URL:
             comfyURL_textbox = textbox.getComfyURLTextbox()
@@ -112,11 +127,18 @@ def buildGUI():
             update_settings_button.click(
                 fn = script.updateSettings, 
                 inputs = [comfyURL_textbox, workflow_file],
-                outputs = None
+                outputs = [currentURL_textbox, workflow_json_show]
             )
 
             # Set clear button.
             clear_settings_button = button.getClearSettingsButton(comfyURL_textbox, workflow_file)
+
+            with gr.Accordion("Provided workflow", open = False):
+                # Get provided workflow filepath.
+                provided_workflow_json = script.getProvidedWorkflow()
+                
+                # Set provided workflow file downloader.
+                provided_workflow_file = file.getProvidedWorkflow(provided_workflow_json)
 
         # [END] TAB SECTION.
         

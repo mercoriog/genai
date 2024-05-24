@@ -4,6 +4,7 @@ __all__ = [
 	"file",
 	"gallery",
 	"image",
+	"JSON",
 	"markdown",
 	"textbox"
 	]

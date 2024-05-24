@@ -15,3 +15,7 @@ def getSettingsPresentation():
         Set workflow api settings.
     ''')
     return presentation
+
+def getChangeSettingMarkdown():
+    presentation = gr.Markdown("Change settings using follow section:")
+    return presentation
