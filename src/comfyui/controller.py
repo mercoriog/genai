@@ -39,7 +39,7 @@ def generateWebSocketImage(positive_prompt, negative_prompt):
     URL = comfyURL.getURL()
 
     # Get workflow file.
-    workflow_file = comfyWORK.getWorkflowFilePath()
+    workflow_file = comfyWORK.getCurrentWorkflow()
 
     # Update workflow file with positive and negative prompt.
     prompt_workflow = comfyWORK.updateWorkflow(positive_prompt, negative_prompt, workflow_file)

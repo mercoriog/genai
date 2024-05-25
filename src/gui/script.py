@@ -1,5 +1,7 @@
 from comfyui import controller as ctrlComfy
 from gallery import controller as ctrlGal
+from PIL import Image
+import io
 import gradio as gr
 import json
 
@@ -18,9 +20,20 @@ def generate(positive_prompt, gallery_item, negative_prompt):
     if gallery_item:
         positive_prompt = buildPositivePrompt(positive_prompt, gallery_item)
 
-    generated_image = ctrlComfy.generateRemoteImage(positive_prompt, negative_prompt)
+    generated_images_dict = ctrlComfy.generateWebSocketImage(positive_prompt, negative_prompt)
 
-    return generated_image
+    generated_images_list = []
+
+    # Itera attraverso i nodi nel dizionario
+    for node_id in generated_images_dict:
+        # Itera attraverso ogni immagine associata al node_id
+        for image_data in generated_images_dict[node_id]:
+            # Crea un oggetto Image a partire dai dati binari
+            image = Image.open(io.BytesIO(image_data))
+            
+            generated_images_list.append(image)
+
+    return generated_images_list[0]
 
 def getProvidedWorkflow():
     return ctrlComfy.getProvidedWorkflow()

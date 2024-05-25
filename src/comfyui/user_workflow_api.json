@@ -1,14 +1,14 @@
 {
   "3": {
     "inputs": {
-      "seed": 470730644339838,
-      "steps": 20,
-      "cfg": 8,
-      "sampler_name": "euler",
-      "scheduler": "normal",
+      "seed": 177620732855263,
+      "steps": 15,
+      "cfg": 5,
+      "sampler_name": "dpmpp_sde_gpu",
+      "scheduler": "karras",
       "denoise": 1,
       "model": [
-        "10",
+        "42",
         0
       ],
       "positive": [
@@ -40,8 +40,8 @@
   },
   "5": {
     "inputs": {
-      "width": 512,
-      "height": 768,
+      "width": 1024,
+      "height": 1024,
       "batch_size": 1
     },
     "class_type": "EmptyLatentImage",
@@ -51,9 +51,9 @@
   },
   "6": {
     "inputs": {
-      "text": "GIORGIO ARMANI, full body photo of blonde female model wearing dark gray jacket, arman1jacket:1.2, (realistic face:1.4), extremely high quality RAW photograph, detailed background, intricate, Exquisite details and textures, (highly detailed:1.2), sharp focus, (ultra detailed photograph:1.2), warm lighting, 4k,  high resolution, (detailed skin:1.2), (detailed eyes:1.2), 8k UHD, DSLR, high quality, film grain, Fujifilm XT3, private party, Venice beach in California, summer day, fashion show",
+      "text": "GIORGIO ARMANI, full body photo of blonde male model wearing dark gray jacket, arman1jacket:1.2, realistic face, extremely high quality RAW photograph, detailed background, intricate, Exquisite details and textures, highly detailed, ultra detailed photograph, warm lighting, 4k, sharp focus, high resolution, detailed skin, detailed eyes, 8k UHD, DSLR, high quality, film grain, Fujifilm XT3, luxury walk in a street of paris",
       "clip": [
-        "10",
+        "42",
         1
       ]
     },
@@ -64,9 +64,9 @@
   },
   "7": {
     "inputs": {
-      "text": "(worst quality, greyscale), ac_neg2, zip2d_neg, ziprealism_neg, watermark, username, signature, text, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, jpeg artifacts, bad feet, extra fingers, mutated hands, poorly drawn hands, bad proportions, extra limbs, disfigured, bad anatomy, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, mutated hands, fused fingers, too many fingers, long neck, black and white filter",
+      "text": "(worst quality, greyscale), ac_neg2, zip2d_neg, ziprealism_neg, watermark, username, signature, text, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, jpeg artifacts, bad feet, extra fingers, mutated hands, poorly drawn hands, bad proportions, extra limbs, disfigured, bad anatomy, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, mutated hands, fused fingers, too many fingers, long neck\n",
       "clip": [
-        "10",
+        "42",
         1
       ]
     },
@@ -75,10 +75,84 @@
       "title": "CLIP Text Encode (Prompt)"
     }
   },
-  "8": {
+  "11": {
+    "inputs": {
+      "vae_name": "sdxl_vae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "12": {
+    "inputs": {
+      "ckpt_name": "sd_xl_base_1.0.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
+    }
+  },
+  "13": {
+    "inputs": {
+      "seed": 34151355144143,
+      "steps": 5,
+      "cfg": 8,
+      "sampler_name": "dpmpp_sde",
+      "scheduler": "normal",
+      "denoise": 0.25,
+      "model": [
+        "4",
+        0
+      ],
+      "positive": [
+        "15",
+        0
+      ],
+      "negative": [
+        "16",
+        0
+      ],
+      "latent_image": [
+        "3",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "15": {
+    "inputs": {
+      "text": "GIORGIO ARMANI, full body photo of blonde male model wearing dark gray jacket, arman1jacket:1.2, realistic face, extremely high quality RAW photograph, detailed background, intricate, Exquisite details and textures, highly detailed, ultra detailed photograph, warm lighting, 4k, sharp focus, high resolution, detailed skin, detailed eyes, 8k UHD, DSLR, high quality, film grain, Fujifilm XT3, luxury walk in a street of paris",
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "16": {
+    "inputs": {
+      "text": "(worst quality, greyscale), ac_neg2, zip2d_neg, ziprealism_neg, watermark, username, signature, text, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, jpeg artifacts, bad feet, extra fingers, mutated hands, poorly drawn hands, bad proportions, extra limbs, disfigured, bad anatomy, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, mutated hands, fused fingers, too many fingers, long neck\n",
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "39": {
     "inputs": {
       "samples": [
-        "3",
+        "13",
         0
       ],
       "vae": [
@@ -91,11 +165,11 @@
       "title": "VAE Decode"
     }
   },
-  "9": {
+  "40": {
     "inputs": {
       "filename_prefix": "ComfyUI",
       "images": [
-        "8",
+        "44",
         0
       ]
     },
@@ -104,17 +178,17 @@
       "title": "Save Image"
     }
   },
-  "10": {
+  "42": {
     "inputs": {
-      "lora_name": "arman1jacket-xl-step00001500.safetensors",
+      "lora_name": "sd_xl_offset_example-lora_1.0.safetensors",
       "strength_model": 1,
       "strength_clip": 1,
       "model": [
-        "4",
+        "12",
         0
       ],
       "clip": [
-        "4",
+        "12",
         1
       ]
     },
@@ -123,13 +197,29 @@
       "title": "Load LoRA"
     }
   },
-  "11": {
+  "43": {
     "inputs": {
-      "vae_name": "sdxl_vae.safetensors"
+      "model_name": "4xNMKDSuperscale_4xNMKDSuperscale.pth"
     },
-    "class_type": "VAELoader",
+    "class_type": "UpscaleModelLoader",
     "_meta": {
-      "title": "Load VAE"
+      "title": "Load Upscale Model"
+    }
+  },
+  "44": {
+    "inputs": {
+      "upscale_model": [
+        "43",
+        0
+      ],
+      "image": [
+        "39",
+        0
+      ]
+    },
+    "class_type": "ImageUpscaleWithModel",
+    "_meta": {
+      "title": "Upscale Image (using Model)"
     }
   }
 }

@@ -46,23 +46,34 @@ def updateWorkflow(positive_prompt, negative_prompt, workflow_file):
         # Set negative prompt.
         prompt["7"]["inputs"]["text"] = f"{negative_prompt}"
 
+        # Set positive prompt.
+        prompt["15"]["inputs"]["text"] = f"{positive_prompt}"
+
+        # Set negative prompt.
+        prompt["16"]["inputs"]["text"] = f"{negative_prompt}"
+
+        seed = random.randint(1, 1500000)
+
         # Set a random seed that maps one image biunivocally.
-        prompt["3"]["inputs"]["seed"] = random.randint(1, 1500000)
+        prompt["3"]["inputs"]["seed"] = seed
+
+        # Set a random seed that maps one image biunivocally.
+        prompt["13"]["inputs"]["seed"] = seed
 
         # Close workflow file.
         file_json.close()
 
+        # If no error occurs, return the processed prompt json file. 
+        return prompt
+
     # An error occurs:
     except Exception as e:
         # Print the exception.
-        print("[ERROR] " + str(e))
+        print("[ERROR] Update workflow failed: " + str(e))
 
         # Return False if error occurs.
         return None
-
-    # If no error occurs, return the processed prompt json file. 
-    return prompt
-
+    
 def saveNewWorkflow(workflow_file):
     # Set an exception handler:
     try:

@@ -1,7 +1,9 @@
 from comfyui import output as comfyOUT
+from comfyui import websocket as comfyWS
 import websocket #NOTE: websocket-client (https://github.com/websocket-client/websocket-client)
 import json
 import requests
+import uuid
 
 def startRemoteQueue(prompt_workflow, URL):
     # Set an exception handler:
@@ -75,7 +77,7 @@ def webSocketGeneration(prompt_workflow, URL):
         ws.connect("ws://{}/ws?clientId={}".format(URL, client_id))
         
         # Perform request and retrive output.
-        images = get_images(ws, prompt_workflow, URL)
+        images = comfyWS.get_images(ws, prompt_workflow, URL, client_id)
 
         # Return generated images (1 image for this setup).
         return images

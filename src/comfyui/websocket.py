@@ -4,7 +4,7 @@ import json
 import urllib.request
 import urllib.parse
 
-def queue_prompt(prompt, server_address):
+def queue_prompt(prompt, server_address, client_id):
     # Define request body for image generation.
     body = {"prompt": prompt, "client_id": client_id}
     
@@ -43,12 +43,9 @@ def get_history(prompt_id, server_address):
         # Return history encoded as json.
         return json_response
 
-def get_images(ws, prompt, server_address):
-    # Get client id with uuid library.
-    client_id = str(uuid.uuid4())
-
+def get_images(ws, prompt, server_address, client_id):
     # Perform request.
-    generation_response = queue_prompt(prompt, server_address)
+    generation_response = queue_prompt(prompt, server_address, client_id)
 
     # Get prompt id from generation request.
     prompt_id = generation_response['prompt_id']
@@ -103,8 +100,6 @@ def get_images(ws, prompt, server_address):
 
             # Assign generated images list to output dictionary.
             output_images[node_id] = generated_images
-
-    print("Output images: " + output_images)
 
     # return generated images dictionary.
     return output_images
