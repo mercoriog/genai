@@ -17,7 +17,7 @@ def buildGUI():
             presentation = markdown.getPresentation()
 
             # [NEW] DYNAMIC SECTION:
-            with gr.Accordion(label = "Select item", open = False):
+            with gr.Accordion(label = "Select item", open = True):
                 
                 # Get avaible images in gallery.
                 gallery_images = ctrlGal.getOrderedImages()
