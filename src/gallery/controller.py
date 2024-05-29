@@ -36,7 +36,10 @@ def getGalleryImages():
     gallery_folder = gallib.getFolderPath()
 
     # List all images in gallery folder.
-    gallery_images = os.listdir(gallery_folder)
+    preview_files = os.listdir(gallery_folder)
+    
+    # Filter image format file.
+    gallery_images = [f for f in preview_files if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
 
     # Create an empty list for loaded image.
     loaded_list = []
