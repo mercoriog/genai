@@ -2,6 +2,7 @@ from comfyui import output as comfyOUT
 from comfyui import comfyURL
 from comfyui import workflow as comfyWORK
 from comfyui import script
+from comfyui import prompt
 from gallery import controller as gal
 
 def generateRemoteImage(positive_prompt, negative_prompt):
@@ -60,6 +61,10 @@ def saveURL(URL):
     # Save user workflow.
     return comfyURL.saveNewURL(URL)
 
+def savePrompts(prompt_matrix):
+    # Save prompt matrix.
+    return prompt.savePrompts(prompt_matrix)
+
 def getProvidedWorkflow():
     return comfyWORK.getWorkflowFilePath()
 
@@ -68,3 +73,6 @@ def getCurrentWorkflow():
 
 def getCurrentURL():
     return comfyURL.getURL()
+
+def getCurrentPrompts():
+    return prompt.getCurrentPrompts()

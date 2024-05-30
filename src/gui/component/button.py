@@ -22,9 +22,9 @@ def getUpdateSettingsButton():
     )
     return update_button
 
-def getClearSettingsButton(comfyURL_textbox, workflow_file):
+def getClearSettingsButton(comfyURL_textbox, workflow_file, prompt_matrix):
     clear_button = gr.ClearButton(
-        components = [comfyURL_textbox, workflow_file],
+        components = [comfyURL_textbox, workflow_file, prompt_matrix],
         value = "Clear",
         variant = "secondary"
     )

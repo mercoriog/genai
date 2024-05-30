@@ -100,10 +100,16 @@ def buildGUI():
             
             with gr.Accordion("Current settings:", open = False):
                 # Get URL.
-                currentURL= script.getCurrentURL()
+                currentURL = script.getCurrentURL()
 
                 # Display URL.
                 currentURL_textbox = textbox.getCurrentURLtextbox(currentURL)
+
+                # Get current prompt combinatiom.
+                currentPrompts_matrix = script.getCurrentPrompts()
+
+                # Display current prompt combination.
+                currentPrompts_dataframe = dataframe.getCurrentPromptsDataframe(currentPrompts_matrix) 
 
                 # Get Current Workflow.
                 currentWorkflow_json = script.getJSONCurrentWorkflow()
@@ -120,18 +126,21 @@ def buildGUI():
             # File uploader for .json workflow file.
             workflow_file = file.getWorkflowFile()
 
+            # Get prompt info.
+            prompt_matrix = dataframe.getPromptMatrix()
+
             # Set update button.
             update_settings_button = button.getUpdateSettingsButton()
 
             # Update button event:
             update_settings_button.click(
                 fn = script.updateSettings, 
-                inputs = [comfyURL_textbox, workflow_file],
-                outputs = [currentURL_textbox, workflow_json_show]
+                inputs = [comfyURL_textbox, workflow_file, prompt_matrix],
+                outputs = [currentURL_textbox, workflow_json_show, currentPrompts_dataframe]
             )
 
             # Set clear button.
-            clear_settings_button = button.getClearSettingsButton(comfyURL_textbox, workflow_file)
+            clear_settings_button = button.getClearSettingsButton(comfyURL_textbox, workflow_file, prompt_matrix)
 
             with gr.Accordion("Provided workflow", open = False):
                 # Get provided workflow filepath.

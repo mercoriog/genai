@@ -11,7 +11,7 @@ def buildPositivePrompt(positive_prompt, gallery_item):
     gallery_names = ctrlGal.getGalleryNames()
     
     # Build positive prompt with user inputs.
-    fixed_positive_prompt = f"{gallery_names[int(gallery_item)]}:1.5, {positive_prompt}"
+    fixed_positive_prompt = f"{gallery_names[int(gallery_item)]}:1.2, {positive_prompt}"
     
     # Return correct positive prompt.
     return fixed_positive_prompt
@@ -51,8 +51,11 @@ def getJSONCurrentWorkflow():
 def getCurrentURL():
     return ctrlComfy.getCurrentURL()
 
+def getCurrentPrompts():
+    return ctrlComfy.getCurrentPrompts()
 
-def updateSettings(comfyURL_textbox, workflow_file):
+
+def updateSettings(comfyURL_textbox, workflow_file, prompt_matrix):
     if workflow_file:
         # Save user workflow.
         work_saved = ctrlComfy.saveWorkflow(workflow_file)
@@ -71,9 +74,19 @@ def updateSettings(comfyURL_textbox, workflow_file):
         else:
             gr.Info("Settings updated.")
 
+    if prompt_matrix:
+        # Save info.
+        prompts_saved = ctrlComfy.savePrompts(prompt_matrix)
+
+        if not prompts_saved:
+            gr.Error("Prompt info not updated.")
+        else:
+            gr.Info("Settings updated.")
+
     current_URL = getCurrentURL()
     current_workflow = getJSONCurrentWorkflow()
+    current_prompts = getCurrentPrompts()
 
-    return current_URL, current_workflow
+    return current_URL, current_workflow, current_prompts
 
     

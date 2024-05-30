@@ -1,4 +1,5 @@
 from repository import comfyui as comfylib
+from comfyui import prompt as comfyPrompt
 import os
 import random
 import json
@@ -40,25 +41,29 @@ def updateWorkflow(positive_prompt, negative_prompt, workflow_file):
         # Load json file.
         prompt = json.load(file_json)
 
-        # Set positive prompt.
-        prompt["6"]["inputs"]["text"] = f"{positive_prompt}"
+        # Get current prompts combination.
+        prompt_matrix = comfyPrompt.getCurrentPrompts()
 
-        # Set negative prompt.
-        prompt["7"]["inputs"]["text"] = f"{negative_prompt}"
+        for row in prompt_matrix:
+            # Get positive from matrix.
+            positive_index = row[0]
+            
+            # Set positive prompt.
+            prompt[str(positive_index)]["inputs"]["text"] = f"{positive_prompt}"
 
-        # Set positive prompt.
-        prompt["15"]["inputs"]["text"] = f"{positive_prompt}"
+            # Set negative prompt.
+            negative_index = row[1]
+            
+            # Set negative prompt.
+            prompt[str(negative_index)]["inputs"]["text"] = f"{negative_prompt}"
 
-        # Set negative prompt.
-        prompt["16"]["inputs"]["text"] = f"{negative_prompt}"
+            seed = random.randint(1, 1500000)
 
-        seed = random.randint(1, 1500000)
-
-        # Set a random seed that maps one image biunivocally.
-        prompt["3"]["inputs"]["seed"] = seed
-
-        # Set a random seed that maps one image biunivocally.
-        prompt["13"]["inputs"]["seed"] = seed
+            # Get seed.
+            seed_index = row[2]
+            
+            # Set a random seed that maps one image biunivocally.
+            prompt[str(seed_index)]["inputs"]["seed"] = seed
 
         # Close workflow file.
         file_json.close()
