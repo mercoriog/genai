@@ -1,14 +1,14 @@
 {
   "3": {
     "inputs": {
-      "seed": 177620732855263,
+      "seed": 335644718247896,
       "steps": 15,
       "cfg": 5,
       "sampler_name": "dpmpp_sde_gpu",
       "scheduler": "karras",
       "denoise": 1,
       "model": [
-        "42",
+        "49",
         0
       ],
       "positive": [
@@ -51,9 +51,9 @@
   },
   "6": {
     "inputs": {
-      "text": "GIORGIO ARMANI, full body photo of blonde male model wearing dark gray jacket, arman1jacket:1.2, realistic face, extremely high quality RAW photograph, detailed background, intricate, Exquisite details and textures, highly detailed, ultra detailed photograph, warm lighting, 4k, sharp focus, high resolution, detailed skin, detailed eyes, 8k UHD, DSLR, high quality, film grain, Fujifilm XT3, luxury walk in a street of paris",
+      "text": "GIORGIO ARMANI, arman1jacket:1.5, full body photo of blonde male model wearing dark gray jacket, realistic face, extremely high quality RAW photograph, detailed background, intricate, Exquisite details and textures, highly detailed, ultra detailed photograph, warm lighting, 4k, sharp focus, high resolution, detailed skin, detailed eyes, 8k UHD, DSLR, high quality, film grain, Fujifilm XT3, luxury walk in a street of paris",
       "clip": [
-        "42",
+        "49",
         1
       ]
     },
@@ -66,7 +66,7 @@
     "inputs": {
       "text": "(worst quality, greyscale), ac_neg2, zip2d_neg, ziprealism_neg, watermark, username, signature, text, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, jpeg artifacts, bad feet, extra fingers, mutated hands, poorly drawn hands, bad proportions, extra limbs, disfigured, bad anatomy, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, mutated hands, fused fingers, too many fingers, long neck\n",
       "clip": [
-        "42",
+        "49",
         1
       ]
     },
@@ -95,7 +95,7 @@
   },
   "13": {
     "inputs": {
-      "seed": 34151355144143,
+      "seed": 1034407451601954,
       "steps": 5,
       "cfg": 8,
       "sampler_name": "dpmpp_sde",
@@ -125,7 +125,7 @@
   },
   "15": {
     "inputs": {
-      "text": "GIORGIO ARMANI, full body photo of blonde male model wearing dark gray jacket, arman1jacket:1.2, realistic face, extremely high quality RAW photograph, detailed background, intricate, Exquisite details and textures, highly detailed, ultra detailed photograph, warm lighting, 4k, sharp focus, high resolution, detailed skin, detailed eyes, 8k UHD, DSLR, high quality, film grain, Fujifilm XT3, luxury walk in a street of paris",
+      "text": "GIORGIO ARMANI, arman1jacket:1.5, full body photo of blonde male model wearing dark gray jacket, realistic face, extremely high quality RAW photograph, detailed background, intricate, Exquisite details and textures, highly detailed, ultra detailed photograph, warm lighting, 4k, sharp focus, high resolution, detailed skin, detailed eyes, 8k UHD, DSLR, high quality, film grain, Fujifilm XT3, luxury walk in a street of paris",
       "clip": [
         "4",
         1
@@ -220,6 +220,44 @@
     "class_type": "ImageUpscaleWithModel",
     "_meta": {
       "title": "Upscale Image (using Model)"
+    }
+  },
+  "47": {
+    "inputs": {
+      "lora_name": "Adidas_V2_SDXL_02.safetensors",
+      "strength_model": 1,
+      "strength_clip": 1,
+      "model": [
+        "42",
+        0
+      ],
+      "clip": [
+        "42",
+        1
+      ]
+    },
+    "class_type": "LoraLoader",
+    "_meta": {
+      "title": "Load LoRA"
+    }
+  },
+  "49": {
+    "inputs": {
+      "lora_name": "Parkasite_XL-000010.safetensors",
+      "strength_model": 1,
+      "strength_clip": 1,
+      "model": [
+        "47",
+        0
+      ],
+      "clip": [
+        "47",
+        1
+      ]
+    },
+    "class_type": "LoraLoader",
+    "_meta": {
+      "title": "Load LoRA"
     }
   }
 }
