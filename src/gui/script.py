@@ -63,7 +63,7 @@ def updateSettings(comfyURL_textbox, workflow_file, prompt_matrix):
         if not work_saved:
             gr.Error("Workflow not updated.")
         else:
-            gr.Info("Settings updated.")
+            gr.Info("Workflow updated.")
 
     if comfyURL_textbox:
         # Save user URL.
@@ -72,7 +72,7 @@ def updateSettings(comfyURL_textbox, workflow_file, prompt_matrix):
         if not url_saved:
             gr.Error("URL not updated.")
         else:
-            gr.Info("Settings updated.")
+            gr.Info("URL updated.")
 
     if prompt_matrix:
         # Save info.
@@ -81,7 +81,7 @@ def updateSettings(comfyURL_textbox, workflow_file, prompt_matrix):
         if not prompts_saved:
             gr.Error("Prompt info not updated.")
         else:
-            gr.Info("Settings updated.")
+            gr.Info("Prompt info updated.")
 
     current_URL = getCurrentURL()
     current_workflow = getJSONCurrentWorkflow()
