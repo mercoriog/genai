@@ -1,7 +1,7 @@
 {
   "3": {
     "inputs": {
-      "seed": 335644718247896,
+      "seed": 758037884148492,
       "steps": 15,
       "cfg": 5,
       "sampler_name": "dpmpp_sde_gpu",
@@ -51,7 +51,7 @@
   },
   "6": {
     "inputs": {
-      "text": "GIORGIO ARMANI, arman1jacket:1.5, full body photo of blonde male model wearing dark gray jacket, realistic face, extremely high quality RAW photograph, detailed background, intricate, Exquisite details and textures, highly detailed, ultra detailed photograph, warm lighting, 4k, sharp focus, high resolution, detailed skin, detailed eyes, 8k UHD, DSLR, high quality, film grain, Fujifilm XT3, luxury walk in a street of paris",
+      "text": "",
       "clip": [
         "49",
         1
@@ -95,7 +95,7 @@
   },
   "13": {
     "inputs": {
-      "seed": 1034407451601954,
+      "seed": 580086303582797,
       "steps": 5,
       "cfg": 8,
       "sampler_name": "dpmpp_sde",
@@ -180,7 +180,7 @@
   },
   "42": {
     "inputs": {
-      "lora_name": "sd_xl_offset_example-lora_1.0.safetensors",
+      "lora_name": "arman1jacket-xl-step00001500.safetensors",
       "strength_model": 1,
       "strength_clip": 1,
       "model": [
